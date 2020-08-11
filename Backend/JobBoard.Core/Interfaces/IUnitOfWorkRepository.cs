@@ -1,7 +1,7 @@
 ﻿namespace JobBoard.Core.Interfaces
 {
-    public class IUnitOfWorkRepository
+    public interface IUnitOfWorkRepository
     {
-        
+        IJobRepository JobRepository { get; }
     }
 }

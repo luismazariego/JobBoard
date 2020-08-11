@@ -1,7 +1,10 @@
 ﻿namespace JobBoard.Core.Interfaces
 {
-    public interface IJobRepository
+    using Entities;
+
+    public interface IJobRepository : ICreateRepository<JobEntity>,
+        IReadRepository<JobEntity>, IRemoveRepository<JobEntity>,
+        IUpdateRepository<JobEntity>
     {
-        
     }
 }
