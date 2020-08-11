@@ -14,7 +14,9 @@ using Microsoft.Extensions.Logging;
 namespace JobBoard.Api
 {
     using AutoMapper;
+    using FluentValidation.AspNetCore;
     using Infrastructure;
+    using Infrastructure.Filters;
 
     public class Startup
     {
@@ -29,10 +31,19 @@ namespace JobBoard.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<GlobalExceptionFilter>();
+            });
             services.AddContext(Configuration);
             services.AddServices();
-            
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<ValidationFilter>();
+            }).AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

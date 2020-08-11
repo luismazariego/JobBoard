@@ -13,9 +13,9 @@
     [Produces("application/json")]
     public class JobController : ControllerBase
     {
-        private IJobService _service;
+        private readonly IJobService _service;
         
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public JobController(IJobService service, IMapper mapper)
         {
