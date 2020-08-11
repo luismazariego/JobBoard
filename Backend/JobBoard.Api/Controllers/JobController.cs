@@ -8,9 +8,9 @@
     using Core.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     
+    [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
-    [ApiController]
     public class JobController : ControllerBase
     {
         private IJobService _service;
@@ -43,7 +43,7 @@
             return Ok(result);
         }
         
-        [HttpGet("{jobId:int")]
+        [HttpGet("{jobId:int}")]
         public async Task<IActionResult> Get(int jobId)
         {
             var job = await _service.GetJob(x => x.Job == jobId);

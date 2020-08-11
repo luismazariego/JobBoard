@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 
 namespace JobBoard.Api
 {
+    using AutoMapper;
+    using Infrastructure;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,7 +28,11 @@ namespace JobBoard.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
+            services.AddContext(Configuration);
+            services.AddServices();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
