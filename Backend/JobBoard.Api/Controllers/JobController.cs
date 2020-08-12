@@ -47,32 +47,32 @@
         public async Task<IActionResult> Get(int jobId)
         {
             var job = await _service.GetJob(x => x.Job == jobId);
-            var response = _mapper.Map<JobDto>(job);
+            //var response = _mapper.Map<JobDto>(job);
 
-            return Ok(response);
+            return Ok(job);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var jobs = await _service.GetJobs();
-            var response = _mapper.Map<IEnumerable<JobDto>>(jobs);
+            //var response = _mapper.Map<IEnumerable<JobDto>>(jobs);
 
-            return Ok(response);
+            return Ok(jobs);
         }
         
         [HttpPut]
-        public async Task<IActionResult> Update(int id, JobDto jobDto)
+        public async Task<IActionResult> Update(JobDto jobDto)
         {
             var job = _mapper.Map<JobEntity>(jobDto);
-            job.Job = id;
+           
 
             var result = await _service.UpdateJob(job);
 
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Remove(int id)
         {
             var job = await _service.GetJob(x => x.Job == id);
